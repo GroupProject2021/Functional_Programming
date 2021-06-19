@@ -45,9 +45,10 @@ object harvestProblem{
             var weekDay = calDate % 7   // act as a column
             var week = calDate / 7      // act as a row
             
-            if(weekDay==0)
+            if(weekDay==0){
                 weekDay=7
-            
+                week=week-1
+            }
             print("please enter the tea amount(kg) you plucked : ")
             var amount = scala.io.StdIn.readInt()
             calenderArray(week)(weekDay-1) = amount   // adding amount to the calender position
@@ -60,7 +61,6 @@ object harvestProblem{
     def max():Unit={
         var posI = 0
         var posJ = 0
-        var dayCount = 0
 
         for(i <- 0 until 5){
             for(j <- 0 until 7){
@@ -68,20 +68,18 @@ object harvestProblem{
                     maxAmount = calenderArray(i)(j)
                     posI = i
                     posJ = j
-                    dayCount = dayCount + 1
                 }
             }
         }
 
-        println("You have the max amount " + maxAmount + "kg at week" + (posI + 1) + " and the day " + dayCount + " (" + dayOrder(posJ) + ")")
+        println("You have the max amount " + maxAmount + "kg at week" + (posI + 1) + " and the day " + (posJ+1) + " (" + dayOrder(posJ) + ")")
     }
 
-    //find the max amount
-    var minAmount = 0
-    def min():Unit={        
+    //find the min amount
+    var minAmount = calenderArray(0)(0)
+    def min():Unit={    
         var posI = 0
         var posJ = 0
-        var dayCount = 0
 
         for(i <- 0 until 5){
             for(j <- 0 until 7){
@@ -89,15 +87,14 @@ object harvestProblem{
                     minAmount = calenderArray(i)(j)
                     posI = i
                     posJ = j
-                    dayCount = dayCount + 1
                 }
             }
         }
 
-        println("You have the min amount " + minAmount + "kg at week" + (posI + 1) + " and the day " + dayCount + " (" + dayOrder(posJ) + ")")
+        println("You have the min amount " + minAmount + "kg at week" + (posI + 1) + " and the day " + (posJ+1) + " (" + dayOrder(posJ) + ")")
     }
 
-    //fint the range
+    //find the range
     var rng = 0
     def range():Unit={
         rng = maxAmount - minAmount
@@ -154,7 +151,7 @@ object harvestProblem{
             med = filteredData(filteredDataAmount/2)                                                                     //if we have odd amount then take the middle one directly 
         }
         else{
-            med = (filteredData((filteredDataAmount/2) - 1) + filteredData((filteredDataAmount/2) - 1))/2     //if we have even amount then we take two middle elements and take the average 
+            med = (filteredData((filteredDataAmount/2) - 1) + filteredData(filteredDataAmount/2))/2     //if we have even amount then we take two middle elements and take the average 
         }
 
         println("The median is " + med + "kg") //because 31 days hence 31 amounts (15)+1+(15) hence 16 is the median position
