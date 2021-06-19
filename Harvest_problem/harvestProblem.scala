@@ -45,6 +45,9 @@ object harvestProblem{
             var weekDay = calDate % 7   // act as a column
             var week = calDate / 7      // act as a row
             
+            if(weekDay==0)
+                weekDay=7
+            
             print("please enter the tea amount(kg) you plucked : ")
             var amount = scala.io.StdIn.readInt()
             calenderArray(week)(weekDay-1) = amount   // adding amount to the calender position
